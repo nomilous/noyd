@@ -12,5 +12,5 @@ npm install -g noyd
 ### usage 
 
 ```
-adb logcat | noyd
+noyd --logcat -w YourLogTag
 ```

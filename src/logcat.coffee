@@ -1,4 +1,22 @@
-colors = require 'colors'
+colors   = require 'colors'
+
+
+argv = require('optimist')
+
+    .usage( 
+
+        """
+        Filter output from adb logcat.
+
+        Usage: adb logcat | noyd -w YourLogtag
+        """
+    )
+    .demand('w')
+    .alias('w', 'white')
+    .describe('w', 'Match to whiten.')
+    .argv
+
+
 
 module.exports = class Logcat
 
@@ -25,8 +43,12 @@ module.exports = class Logcat
             # for line in lines
 
             for line in chunk.split '\n'
-                first2 = line.slice(0,2)
-                switch first2
-                    when 'W/' then console.log line.bold.red
-                    else console.log line.grey
+                continue if line.length == 0
+                if line.match argv.white
+                    console.log line.white.bold
+                else
+                    first2 = line.slice(0,2)
+                    switch first2
+                        when 'W/' then console.log line.bold.red
+                        else console.log line.grey
 

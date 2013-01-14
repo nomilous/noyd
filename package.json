@@ -9,7 +9,9 @@
       "email": "nomilous@gmail.com"
     }
   ],
-  "bin": {},
+  "bin": {
+    "noyd": "./bin/noyd"
+  },
   "dependencies": {},
   "devDependencies": {
     "coffee-script": "~1.4.0",

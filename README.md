@@ -8,3 +8,9 @@ nodejs command line tools for android developers
 ```
 npm install -g noyd
 ```
+
+### usage 
+
+```
+adb logcat | noyd
+```

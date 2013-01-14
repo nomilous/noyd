@@ -1,0 +1,20 @@
+{
+  "name": "noyd",
+  "description": "nodejs command line tools for android developers",
+  "version": "0.0.0",
+  "author": "nomilous <nomilous@gmail.com>",
+  "contributors": [
+    {
+      "name": "nomilous",
+      "email": "nomilous@gmail.com"
+    }
+  ],
+  "bin": {},
+  "dependencies": {},
+  "devDependencies": {
+    "coffee-script": "~1.4.0",
+    "hound": "~1.0.4",
+    "should": "~1.2.1",
+    "mocha": "~1.8.1"
+  }
+}

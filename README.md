@@ -1,4 +1,10 @@
-node-android-tools
-==================
+noyd
+=======
 
-command line tools for android developers
+nodejs command line tools for android developers
+
+### install
+
+```
+npm install -g noyd
+```

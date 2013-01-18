@@ -49,5 +49,6 @@ module.exports = class Build
 
 
             @watchDir argv, './src', (file, stats) =>
-                @writeLine 'detected change file: ' + file
+                @writeLine ('detected changed file: ' + file).bold.white
                 @compile argv, file
+

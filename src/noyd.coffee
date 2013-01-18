@@ -29,6 +29,5 @@ module.exports =
 
     run: -> 
 
-        # require('./logcat').run argv
+        require('./logcat').run argv
         require('./build').run argv
-

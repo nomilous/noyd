@@ -15,8 +15,8 @@ java   = require 'java'
 module.exports = class Build
 
     @compile: (argv, file) -> 
-        java.classpath.push './lib';
-        java.callStaticMethod 'noyd.compile.Compile', 'test', (err, result) -> 
+        java.classpath.push __dirname
+        java.callStaticMethod 'noyd.compile.Compiler', 'compileErrors', file, (err, result) -> 
             console.log result
 
     @writeLine: (line) -> 

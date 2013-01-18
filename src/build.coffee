@@ -1,6 +1,7 @@
 fs     = require 'fs'
 hound  = require 'hound'
 colors = require 'colors'
+java   = require 'java'
 
 #
 # If ./build.xml watch ./src dir and...
@@ -12,6 +13,11 @@ colors = require 'colors'
 
 
 module.exports = class Build
+
+    @compile: (argv, file) -> 
+        java.classpath.push './lib';
+        java.callStaticMethod 'noyd.compile.Compile', 'test', (err, result) -> 
+            console.log result
 
     @writeLine: (line) -> 
         console.log 'build  - '.green + line
@@ -33,3 +39,4 @@ module.exports = class Build
 
             @watchDir argv, './src', (file, stats) =>
                 @writeLine 'detected change file: ' + file
+                @compile argv, file

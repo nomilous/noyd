@@ -18,8 +18,7 @@ module.exports = class Build
 
 
     @watchDir: (argv, dir, callback) ->
-        @writeLine 'watching %s directory for changes', dir 
-
+        @writeLine 'watching ' + dir + ' directory for changes'
         watcher = hound.watch dir
         watcher.on 'change', callback
 

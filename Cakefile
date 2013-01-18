@@ -21,6 +21,14 @@ runSpec = (fileOrFolder) ->
     test_runner.stdout.pipe process.stdout
     test_runner.stderr.pipe process.stderr
 
+compileJava = (file) -> 
+    console.log 'attempting: javac %s -d ./lib', file
+    javac = child_process.spawn 'javac', [ file,
+        '-d', './lib'
+    ]
+    javac.stdout.pipe process.stdout
+    javac.stderr.pipe process.stderr
+
 changed = (file) ->
     match = file.match /(src|spec)\/(.+)(_spec)?.coffee/
     spec_file = 'spec/' + match[2] + '_spec.coffee'
@@ -32,8 +40,12 @@ watchSrcDir = ->
     console.log 'Watching ./src'
     watcher = hound.watch './src'
     watcher.on 'change', (file, stats) ->
-        changed file
-        build()
+        console.log 'Changed: ', file
+        if file.split('.').pop() == 'java'
+            compileJava file
+        else
+            changed file
+            build()
 
 watchSpecDir = ->
     console.log 'Watching ./spec'

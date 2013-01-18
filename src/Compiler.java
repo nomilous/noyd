@@ -1,16 +1,63 @@
 package noyd.compile;
 
+import java.util.Arrays;
+
+import javax.tools.Diagnostic;
+import javax.tools.DiagnosticCollector;
+import javax.tools.JavaCompiler;
+import javax.tools.JavaFileObject;
+import javax.tools.StandardJavaFileManager;
+import javax.tools.ToolProvider;
+
 public class Compiler {
 
     public static String[] compileErrors(String file) {
 
-        System.out.println(file + "\n");
+        //
+        // Compile and collect Diagnostic
+        // http://stackoverflow.com/questions/11298856/syntax-checking-in-java
+        //
 
-        return new String[] {
+        JavaCompiler compiler
+            = ToolProvider.getSystemJavaCompiler();
 
-            "error1", "error2"
+        StandardJavaFileManager fileManager
+            = compiler.getStandardFileManager(null, null, null);
 
-        };
+        Iterable<? extends JavaFileObject> compilationUnits
+            = fileManager.getJavaFileObjectsFromStrings(Arrays.asList(file));
+
+        DiagnosticCollector<JavaFileObject> diagnostics
+            = new DiagnosticCollector<JavaFileObject>();
+
+        compiler.getTask(
+
+            null, 
+            fileManager, 
+            diagnostics, 
+            null, 
+            null, 
+            compilationUnits
+
+        ).call();
+
+        //
+        // Assemble String[] array of errors
+        //
+
+        int i = 0;
+        String[] errors = new String[diagnostics.getDiagnostics().size()];
+
+        for (Diagnostic diagnostic : diagnostics.getDiagnostics())
+
+            errors[i++] = String.format(
+
+                "%s", 
+                diagnostic.getKind()
+
+            );
+                
+        return errors;
 
     }
 

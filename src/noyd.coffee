@@ -21,11 +21,14 @@ argv = require('optimist')
     .alias('s','silent')
     .describe('s','Only show matches and exceptions')
 
+
+
     .argv
 
 module.exports = 
 
     run: -> 
 
-        require('./logcat').run argv
+        # require('./logcat').run argv
+        require('./build').run argv
 

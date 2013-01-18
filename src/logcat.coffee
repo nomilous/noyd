@@ -5,7 +5,7 @@ colors         = require 'colors'
 module.exports = class Logcat
 
     @writeLine: (line) -> 
-        console.log 'logcat - '.green + line
+        console.log 'logcat - '.blue + line
 
 
     @processLine: (argv, line) -> 

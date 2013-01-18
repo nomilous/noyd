@@ -6,21 +6,32 @@ java   = require 'java'
 #
 # If ./build.xml watch ./src dir and...
 # 
-# - pending1
+# - display sintax errors on .java file change
 # - pending2
 # 
 #
 
-
 module.exports = class Build
-
-    @compile: (argv, file) -> 
-        java.classpath.push __dirname
-        java.callStaticMethod 'noyd.compile.Compiler', 'compileErrors', file, (err, result) -> 
-            console.log result
 
     @writeLine: (line) -> 
         console.log 'build  - '.green + line
+
+    @compile: (argv, file) -> 
+        java.classpath.push __dirname
+        java.callStaticMethod 'noyd.compile.Compiler', 'compileErrors', file, (err, result) => 
+            if err
+                @writeLine err.bold.red
+                return
+            else
+                errors = 0
+                for compileError in result
+                    continue if compileError.match /does not exist/
+                    continue if compileError.match /cannot find symbol/
+                    continue if compileError.match /method does not override/
+                    errors++
+                    @writeLine compileError.split('\n')[0].bold.red
+                if errors == 0
+                    @writeLine 'syntax ok'.bold.green
 
 
     @watchDir: (argv, dir, callback) ->

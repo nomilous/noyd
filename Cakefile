@@ -22,9 +22,10 @@ runSpec = (fileOrFolder) ->
     test_runner.stderr.pipe process.stderr
 
 compileJava = (file) -> 
-    console.log 'attempting: javac %s -d ./lib', file
+    console.log 'attempting: javac -d ./lib', file
     javac = child_process.spawn 'javac', [ file,
-        '-d', './lib'
+        '-d', './lib',
+        
     ]
     javac.stdout.pipe process.stdout
     javac.stderr.pipe process.stderr

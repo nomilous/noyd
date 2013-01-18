@@ -12,7 +12,7 @@ import javax.tools.ToolProvider;
 
 public class Compiler {
 
-    public static String[] compileErrors(String file) {
+        public static String[] compileErrors(String file) {
 
         //
         // Compile and collect Diagnostic
@@ -53,12 +53,11 @@ public class Compiler {
 
             errors[i++] = String.format(
 
-                "%s on Line[%s] Column[%s] - %s", 
+                "%s\tLine[%s,%s]\t%s", 
                 diagnostic.getKind(),
                 diagnostic.getLineNumber(),
                 diagnostic.getPosition(),
                 diagnostic.getMessage(Locale.ROOT)
-
 
             );
                 

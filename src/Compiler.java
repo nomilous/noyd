@@ -1,6 +1,7 @@
 package noyd.compile;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 import javax.tools.Diagnostic;
 import javax.tools.DiagnosticCollector;
@@ -52,8 +53,12 @@ public class Compiler {
 
             errors[i++] = String.format(
 
-                "%s", 
-                diagnostic.getKind()
+                "%s on Line[%s] Column[%s] - %s", 
+                diagnostic.getKind(),
+                diagnostic.getLineNumber(),
+                diagnostic.getPosition(),
+                diagnostic.getMessage(Locale.ROOT)
+
 
             );
                 

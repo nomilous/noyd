@@ -3,6 +3,7 @@ hound  = require 'hound'
 colors = require 'colors'
 java   = require 'java'
 ant    = require './ant'
+action = require './action'
 
 #
 # If ./build.xml watch ./src dir and...
@@ -29,16 +30,26 @@ module.exports = class Build
                     continue if compileError.match /does not exist/
                     continue if compileError.match /cannot find symbol/
                     continue if compileError.match /method does not override/
+                    continue if compileError.match /incompatible types/
                     errors++
                     @writeLine compileError.split('\n')[0].bold.red
                 if errors == 0
                     @writeLine 'syntax ok'.bold.green
+                    action.run argv, file
 
 
     @watchDir: (argv, dir, callback) ->
         @writeLine 'watching ' + dir + ' directory for changes'
         watcher = hound.watch dir
         watcher.on 'change', callback
+        watcher.on 'create', (file) ->
+            if file.match /\.class$/
+                
+                #
+                # successful compiles leave .class files in the src dir, delete
+                #
+                
+                fs.unlink file, (err) ->  
 
 
     @run: (argv) -> 
@@ -49,7 +60,9 @@ module.exports = class Build
             return if err 
 
 
-            @watchDir argv, './src', (file, stats) =>
-                @writeLine ('detected changed file: ' + file).bold.white
-                @compile argv, file
+            @watchDir argv, './src', (file, stats) => 
+                if file.match /\.java$/
+                    @writeLine ('detected changed file: ' + file).bold.white
+                    @compile argv, file
+
 

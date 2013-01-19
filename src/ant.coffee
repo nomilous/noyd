@@ -56,9 +56,19 @@ module.exports = class Ant
             if key 
 
                 if key.ctrl and key.name == 'c'
+
+                    #
+                    # TODO: fix, this leaves logcat kids laying around...
+                    #
+
                     process.exit()
 
                 else if key.ctrl and key.name == 'd'
+                
+                    #
+                    # TODO: fix, this leaves logcat kids laying around...
+                    #
+                    
                     process.exit()
 
                 else if key.name == 'enter'

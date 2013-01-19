@@ -10,7 +10,9 @@
 # (to open sublime console)         ctrl `  
 # (to run the plugin from console)  view.run_command('noyd')
 # 
-#
+# http://net.tutsplus.com/tutorials/python-tutorials/how-to-create-a-sublime-text-2-plugin/
+# 
+
 
 
 import sublime

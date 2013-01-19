@@ -1,11 +1,12 @@
 child_process  = require 'child_process'
 colors         = require 'colors'
+ant            = require './ant'
 
 
 module.exports = class Logcat
 
     @writeLine: (line) -> 
-        console.log 'logcat - '.blue + line
+        ant.writeLine 'logcat '.blue + ': '.bold.white, line
 
 
     @processLine: (argv, line) -> 

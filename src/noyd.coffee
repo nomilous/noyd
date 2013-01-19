@@ -31,3 +31,5 @@ module.exports =
 
         require('./logcat').run argv
         require('./build').run argv
+        require('./ant').run argv
+

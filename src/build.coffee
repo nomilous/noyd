@@ -2,6 +2,7 @@ fs     = require 'fs'
 hound  = require 'hound'
 colors = require 'colors'
 java   = require 'java'
+ant    = require './ant'
 
 #
 # If ./build.xml watch ./src dir and...
@@ -14,7 +15,7 @@ java   = require 'java'
 module.exports = class Build
 
     @writeLine: (line) -> 
-        console.log 'build  - '.green + line
+        ant.writeLine ' build '.green, ': '.bold.white + line
 
     @compile: (argv, file) -> 
         java.classpath.push __dirname

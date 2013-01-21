@@ -1,4 +1,5 @@
-argv = require('optimist')
+children = require './children'
+argv     = require('optimist')
 
     .usage( 
 
@@ -21,9 +22,10 @@ argv = require('optimist')
     .alias('s','silent')
     .describe('s','Only show matches and exceptions')
 
-
-
     .argv
+
+
+
 
 module.exports = 
 
@@ -32,4 +34,7 @@ module.exports =
         require('./logcat').run argv
         require('./build').run argv
         require('./ant').run argv
+
+        
+
 

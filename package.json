@@ -1,7 +1,7 @@
 {
   "name": "noyd",
   "description": "nodejs command line tools for android developers",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "nomilous <nomilous@gmail.com>",
   "contributors": [
     {

@@ -1,6 +1,7 @@
 child_process  = require 'child_process'
 colors         = require 'colors'
 ant            = require './ant'
+children       = require './children'
 
 
 module.exports = class Logcat
@@ -44,7 +45,7 @@ module.exports = class Logcat
         process.on 'SIGINT', -> child.kill()
         options = ['logcat']
         child = child_process.spawn 'adb', options
-
+        children.add child
         child.stdout.on 'data', (data) =>
             buffer = new Buffer(data) 
             for line in buffer.toString().split '\n'

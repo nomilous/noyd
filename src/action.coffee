@@ -12,7 +12,7 @@ module.exports = class Action
 
         lazy = Lazy fs.createReadStream file
         lazy.lines.forEach (chunk) =>
-
+            return unless chunk
             line = chunk.toString()
             if line.match /^\/\/noyd:onchange:exec/
 

@@ -35,7 +35,7 @@ module.exports = class Build
                     @writeLine compileError.split('\n')[0].bold.red
                 if errors == 0
                     @writeLine 'syntax ok'.bold.green
-                    action.run argv, file
+                    #action.run argv, file
 
 
     @watchDir: (argv, dir, callback) ->

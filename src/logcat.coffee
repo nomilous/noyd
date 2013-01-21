@@ -25,7 +25,7 @@ module.exports = class Logcat
                 # match exceptions
                 # 
 
-                when 'E/'
+                when 'E/', 'W/'
 
                     if line.match /Exception/
                         @writeLine line.bold.red
